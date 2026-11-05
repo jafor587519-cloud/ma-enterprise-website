@@ -1,1 +1,108 @@
 
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MA Enterprise | Sanitary & Hardware</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#222}
+header{background:#075b46;color:white;text-align:center;padding:25px 12px}
+header h1{margin:0;font-size:30px}
+header p{margin:8px 0 0}
+nav{background:#064536;text-align:center;padding:12px}
+nav a{color:white;text-decoration:none;margin:8px;font-weight:bold}
+.container{padding:15px;max-width:1000px;margin:auto}
+h2{color:#075b46}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.item{background:white;padding:18px 8px;text-align:center;border-radius:10px;box-shadow:0 2px 7px #ddd}
+.item h3{margin:5px;font-size:17px}
+button{background:#07865e;color:white;border:0;padding:10px 14px;border-radius:6px;cursor:pointer}
+input{padding:10px;width:100%;margin:7px 0;border:1px solid #ccc;border-radius:5px}
+.cart{background:white;padding:15px;border-radius:10px;margin-top:20px}
+footer{background:#064536;color:white;text-align:center;padding:20px;margin-top:25px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>MA ENTERPRISE</h1>
+<p>Sanitary & Hardware Shop</p>
+<p>Tiles | Sanitary | Paint | Hardware</p>
+</header>
+
+<nav>
+<a href="#products">Products</a>
+<a href="#cart">Order List</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<div class="container">
+<h2 id="products">আমাদের পণ্যের ক্যাটাগরি</h2>
+
+<div class="grid">
+<div class="item"><h3>Tiles</h3><button onclick="add('Tiles')">অর্ডার যোগ করুন</button></div>
+<div class="item"><h3>Sanitary Items</h3><button onclick="add('Sanitary Items')">অর্ডার যোগ করুন</button></div>
+<div class="item"><h3>Paint & Color</h3><button onclick="add('Paint & Color')">অর্ডার যোগ করুন</button></div>
+<div class="item"><h3>Hardware</h3><button onclick="add('Hardware')">অর্ডার যোগ করুন</button></div>
+<div class="item"><h3>Electric Items</h3><button onclick="add('Electric Items')">অর্ডার যোগ করুন</button></div>
+<div class="item"><h3>Pipe Fitting</h3><button onclick="add('Pipe Fitting')">অর্ডার যোগ করুন</button></div>
+<div class="item"><h3>Polish Items</h3><button onclick="add('Polish Items')">অর্ডার যোগ করুন</button></div>
+<div class="item"><h3>Gas Stove</h3><button onclick="add('Gas Stove')">অর্ডার যোগ করুন</button></div>
+</div>
+
+<div class="cart" id="cart">
+<h2>আপনার অর্ডার লিস্ট</h2>
+<ul id="list"></ul>
+<button onclick="sendOrder()">WhatsApp-এ অর্ডার করুন</button>
+<button onclick="clearCart()" style="background:#c0392b">মুছুন</button>
+</div>
+
+<div class="cart" id="contact">
+<h2>যোগাযোগ</h2>
+<p>MA Enterprise</p>
+<p>WhatsApp: 01830133537</p>
+</div>
+</div>
+
+<footer>
+<p>© 2026 MA Enterprise. All Rights Reserved.</p>
+</footer>
+
+<script>
+let cart=[];
+function add(name){
+cart.push(name);
+show();
+}
+function show(){
+document.getElementById('list').innerHTML='';
+cart.forEach((item,index)=>{
+let li=document.createElement('li');
+li.textContent=item+' ';
+let btn=document.createElement('button');
+btn.textContent='বাদ দিন';
+btn.onclick=function(){cart.splice(index,1);show();};
+li.appendChild(btn);
+document.getElementById('list').appendChild(li);
+});
+}
+function clearCart(){
+cart=[];
+show();
+}
+function sendOrder(){
+if(cart.length===0){
+alert('আগে পণ্য যোগ করুন');
+return;
+}
+let msg='আসসালামু আলাইকুম, MA Enterprise-এ আমার অর্ডার:\n'+
+cart.map((x,i)=>(i+1)+'. '+x).join('\n');
+window.open('https://wa.me/8801830133537?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
+
+</body>
+</html>
